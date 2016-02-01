@@ -11,8 +11,9 @@ If met `Python.h not found` you need install python2.7-dev
 
     scrapy startproject tutorial
 
+### Run command
 
-
+    scrapy crawl dmoz -o items.json
 
 
 
