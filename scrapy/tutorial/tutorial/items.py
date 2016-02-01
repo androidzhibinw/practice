@@ -16,3 +16,7 @@ class DmozItem(scrapy.Item):
     link = Field()
     desc = Field()
     pass
+class JdItem(scrapy.Item):
+    title = Field()
+    price = Field()
+    pass
