@@ -112,14 +112,30 @@ body {
 	text-align: left;
 }
 
-#scroller li {
-	padding: 0 10px;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #fff;
-	background-color: #fafafa;
-	font-size: 14px;
+.item {
+    background: #fff;
+    display: block;
+    min-height: 100px;
+    position: relative;
+    overflow: auto;
+    cursor: pointer;
+    margin-bottom: 15px
+}
+.item .item-pic {
+    position: relative;
+    overflow: hidden;
+    height: 195px
+}
+
+.item-pic img {
+    width: 100%;
+    min-height: 100%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    top: 50%;
+    position: relative;
+    border: 0;
+    background-color: #efeff4
 }
 
 </style>
@@ -130,14 +146,20 @@ body {
 <div id="wrapper">
 	<div id="scroller">
 		<ul>
-            <li>
-                <img alt="" src="img/original.jpg"/>
+            <li class="item">
+            <div class="item-pic" style="width:100%;height:1876.5px">
+                <img alt="" src="img/original.jpg" style="display;inline;"/>
+            </div>
             </li>
-            <li>
-                <img alt="" src="img/original.jpg"/>
+            <li class="item">
+            <div class="item-pic"  style="width:100%;height:1876.5px">
+                <img alt="" src="img/original.jpg" style="display;inline;"/>
+            </div>
             </li>
-            <li>
-                <img alt="" src="img/original.jpg"/>
+            <li class="item">
+            <div class="item-pic" style="width:100%;height:1876.5px">
+                <img alt="" src="img/original.jpg" style="display;inline;"/>
+            </div>
             </li>
 			<li>Pretty row 2</li>
 			<li>Pretty row 3</li>
