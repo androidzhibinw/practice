@@ -11,13 +11,14 @@ class JdSpider(BaseSpider):
     allowed_domains = ["jd.com","p.3.cn"]
     item_url = "http://item.jd.com/2329029.html"
     start_urls = [
-            item_url
+            item_url,
+            "http://item.jd.com/1514794.html"
     ]
     PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
 
     def parse(self, response):
         #hxs = HtmlXPathSelector(response)
-        lst = self.item_url.split('/')
+        lst = response.url.split('/')
         item_id =  lst[-1].split('.')[0]
         #print response.body
         #price = response.selector.xpath('//strong[@id="jd-price"]/text()').extract()
