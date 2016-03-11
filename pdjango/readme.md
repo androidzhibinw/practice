@@ -9,7 +9,7 @@
     git clone git://github.com/django/django.git
     pip install -e django/
 
-#### first
+#### create first project
 
     $ django-admin startproject mysite
 
@@ -17,3 +17,8 @@
 #### run server
 
     $ python manage.py runserver 0.0.0.0:8000
+
+
+#### create first app
+
+    python manage.py startapp firstapp
