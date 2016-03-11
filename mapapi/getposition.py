@@ -7,6 +7,8 @@ MAP_URI = 'http://api.map.baidu.com/geocoder/v2/?output=json'
 AK_PRE='&ak='
 ADDR_PRE='&address='
 ADDR='上海浦东新区金科路'
+addr ='上海黄浦区西藏中路268号来'
+add2='翔殷路1003号'
 def get_position(address):
     lng=None
     lat=None
@@ -22,5 +24,5 @@ def get_position(address):
 
 
 
-print get_position(ADDR)
+print get_position(add2)
 
