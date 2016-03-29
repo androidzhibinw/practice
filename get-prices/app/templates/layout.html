@@ -20,6 +20,13 @@
      <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </head>
   <body>
+<h3>Focus on prices</h3>
+    <div class="form-group">
+        <div class="col-sm-offset-10 col-sm-2">
+            <a href="/" class="btn btn-info " role="button"><span class="glyphicon glyphicon-home"><span></a>
+            <a href="{{url_for("item.new_item")}}" class="btn btn-info " role="button"><span class="glyphicon glyphicon-plus"><span></a>
+        </div>
+    </div>
       {% block body %}{% endblock %}
   </body>
 </html>
