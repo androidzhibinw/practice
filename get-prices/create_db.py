@@ -1,5 +1,5 @@
 from app import db
-from app.mod_post.models import Item
+from app.mod_item.models import Item
 
 db.drop_all()
 db.create_all()
