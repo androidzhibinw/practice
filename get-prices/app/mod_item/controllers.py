@@ -1,6 +1,8 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 
+from app import db
 from app.mod_item.forms import ItemForm
+from app.mod_item.models import Item
 mod_item = Blueprint('item', __name__, url_prefix='/item')
 
 @mod_item.route('/all')
@@ -10,6 +12,10 @@ def items():
 @mod_item.route('/new', methods=['GET','POST'])
 def new_item():
     form = ItemForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        item = Item(None,form.link.data)
+        db.session.add(item)
+        db.session.commit()
     return render_template('item/new.html',form=form)
 
 @mod_item.route('/delete/<int:id>', methods=['POST'])
