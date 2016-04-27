@@ -5,7 +5,7 @@ from app.mod_base.models import Base
 class Item(Base):
     __table_name__ = 'item'
     title = db.Column(db.String())
-    link = db.Column(db.Text, nullable=False)
+    link = db.Column(db.Text, nullable=False,unique=True)
 
     def __init__(self, title, link):
         self.title = title
