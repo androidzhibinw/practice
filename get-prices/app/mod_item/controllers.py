@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request
 
-from app import db
+from app import app,db
 from app.mod_item.forms import ItemForm
 from app.mod_item.models import Item
 mod_item = Blueprint('item', __name__, url_prefix='/item')
@@ -13,9 +13,15 @@ def items():
 def new_item():
     form = ItemForm()
     if request.method == 'POST' and form.validate_on_submit():
-        item = Item(None,form.link.data)
-        db.session.add(item)
-        db.session.commit()
+        #query before insert
+        item_db= Item.query.filter(Item.link == form.link.data).first()
+        if item_db is None:
+            item = Item(None,form.link.data)
+            db.session.add(item)
+            db.session.commit()
+        else:
+            app.logger.info('item already have in db.')
+
     return render_template('item/new.html',form=form)
 
 @mod_item.route('/delete/<int:id>', methods=['POST'])

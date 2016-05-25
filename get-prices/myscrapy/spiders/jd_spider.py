@@ -19,6 +19,9 @@ class JdSpider(BaseSpider):
             item_url,
     ]
     PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
+    def getUrls(self):
+        pass
+
 
     def parse(self, response):
         #hxs = HtmlXPathSelector(response)
