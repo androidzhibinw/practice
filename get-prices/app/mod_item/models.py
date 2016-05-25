@@ -11,7 +11,7 @@ class Item(Base):
         self.title = title
         self.link = link
     def __repr__(self):
-        return  '<Item %r,%r>' % self.title,self.content
+        return  '<Item title:'+self.title + ',link:' +self.link
 class Price(Base):
     __table_name__ = 'price'
     date_time = db.Column(db.DateTime(),nullable=False)

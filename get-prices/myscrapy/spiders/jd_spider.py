@@ -3,6 +3,7 @@ from scrapy.spider import BaseSpider
 from scrapy.selector import Selector
 from scrapy.item import Item,Field
 
+from myscrapy.dbutils import query_item
 import scrapy
 import json
 
@@ -10,6 +11,12 @@ class JdItem(scrapy.Item):
     title = Field()
     price = Field()
     pass
+
+def test_db_utils():
+    items = query_item()
+    for item in items:
+        print 'link:' + item.link
+        print 'title:' + item.title
 
 class JdSpider(BaseSpider):
     name = "jd"
@@ -24,6 +31,7 @@ class JdSpider(BaseSpider):
 
 
     def parse(self, response):
+        test_db_utils()
         #hxs = HtmlXPathSelector(response)
         lst = response.url.split('/')
         item_id =  lst[-1].split('.')[0]
