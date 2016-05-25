@@ -1,26 +1,15 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
+# -*- coding: utf-8 -*-
 from app.mod_item.models import Item
-from app import db
-
-#engine = create_engine('sqlite:///app.db')
-
-#connection = engine.connect()
-
-#result  = connection.execute('select * from item;');
-
-result = Item.query.all()
-print result
+from app import db,app
 
 
 def query_item():
     return Item.query.all()
 
-
-
-
-
-
-
-
+def update_item_title(item_link,title=None):
+    item = Item.query.filter(Item.link==item_link).first()
+    app.logger.info('update_item_title')
+    if item and title and (item.title is None):
+        app.logger.info('update title' + title)
+        item.title = title
+        db.session.commit()

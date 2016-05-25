@@ -1,11 +1,12 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 from scrapy.spider import BaseSpider
 from scrapy.selector import Selector
 from scrapy.item import Item,Field
 
-from myscrapy.dbutils import query_item
 import scrapy
 import json
+
+from myscrapy.dbutils import update_item_title,query_item
 
 class JdItem(scrapy.Item):
     title = Field()
@@ -15,19 +16,18 @@ class JdItem(scrapy.Item):
 def test_db_utils():
     items = query_item()
     for item in items:
-        print item
+        print item.link
 
 class JdSpider(BaseSpider):
     name = "jd"
     allowed_domains = ["jd.com","p.3.cn"]
-    item_url = "http://item.jd.com/2329029.html"
-    start_urls = [
-            item_url,
-    ]
+    start_urls = []
+    items = query_item()
+    for item in items:
+        start_urls.append(item.link)
     PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
     def getUrls(self):
         pass
-
 
     def parse(self, response):
         test_db_utils()
@@ -42,6 +42,7 @@ class JdSpider(BaseSpider):
         title = response.selector.xpath('//div[@id="name"]/h1/text()').extract()
         item = JdItem()
         item['title'] = title[0]
+        update_item_title(response.url,title[0])
         request.meta['item'] = item
         return request
     def parse_price(self, response):

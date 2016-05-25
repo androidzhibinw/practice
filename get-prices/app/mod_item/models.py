@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from app import db
 from app.mod_base.models import Base
 
