@@ -4,14 +4,16 @@ from app.mod_base.models import Base
 class Item(Base):
     __table_name__ = 'item'
     title = db.Column(db.String())
+    domain = db.Column(db.String(),nullable=False)
     link = db.Column(db.Text, nullable=False,unique=True)
     prices = db.relationship('Price',backref='item',lazy='dynamic')
 
-    def __init__(self, title, link):
+    def __init__(self, title, link,domain):
         self.title = title
         self.link = link
+        self.domain = domain
     def __repr__(self):
-        return  '<Item title:'+self.title + ',link:' +self.link
+        return '<Item:(%s,%s,%s)>' % (self.title,self.link,self.domain)
 class Price(Base):
     __table_name__ = 'price'
     date_time = db.Column(db.DateTime(),nullable=False)

@@ -15,8 +15,7 @@ class JdItem(scrapy.Item):
 def test_db_utils():
     items = query_item()
     for item in items:
-        print 'link:' + item.link
-        print 'title:' + item.title
+        print item
 
 class JdSpider(BaseSpider):
     name = "jd"

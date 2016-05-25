@@ -6,7 +6,7 @@ db.drop_all()
 db.create_all()
 
 
-item = Item('title1','link-test')
+item = Item(None,'http://item.jd.com/1856581.html','jd')
 
 d = datetime.now()
 price = Price(item.id,d,"100.99")
