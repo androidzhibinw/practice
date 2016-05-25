@@ -8,8 +8,7 @@ db.create_all()
 
 item = Item(None,'http://item.jd.com/1856581.html','jd')
 
-d = datetime.now()
-price = Price(item.id,d,"100.99")
+price = Price(item.id,"100.99")
 db.session.add(item)
 item.prices.append(price)
 db.session.commit()

@@ -17,12 +17,10 @@ class Item(Base):
         return '<Item:(%s,%s,%s)>' % (self.title,self.link,self.domain)
 class Price(Base):
     __table_name__ = 'price'
-    date_time = db.Column(db.DateTime(),nullable=False)
     price = db.Column(db.Float(),nullable=False)
     item_id = db.Column(db.Integer(),db.ForeignKey("item.id"))
-    def __init__(self,item_id,date_time,price):
+    def __init__(self,item_id,price):
         self.item_id = item_id
-        self.date_time = date_time
         self.price = price
     def __repr__(self):
-        return '<Price %r,%r,%r>' % self.item_id,self.date_time,self.price
+        return '<Price (%r,%r)>' % (self.item_id,self.price)

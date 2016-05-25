@@ -6,7 +6,7 @@ from scrapy.item import Item,Field
 import scrapy
 import json
 
-from myscrapy.dbutils import update_item_title,query_item
+from myscrapy.dbutils import update_item_title,query_item,save_price
 
 class JdItem(scrapy.Item):
     title = Field()
@@ -22,6 +22,7 @@ class JdSpider(BaseSpider):
     name = "jd"
     allowed_domains = ["jd.com","p.3.cn"]
     start_urls = []
+    oritinal_url=None
     items = query_item()
     for item in items:
         start_urls.append(item.link)
@@ -32,6 +33,7 @@ class JdSpider(BaseSpider):
     def parse(self, response):
         test_db_utils()
         #hxs = HtmlXPathSelector(response)
+        self.oritinal_url = response.url
         lst = response.url.split('/')
         item_id =  lst[-1].split('.')[0]
         #print response.body
@@ -53,4 +55,7 @@ class JdSpider(BaseSpider):
         data = json.loads(part_b)
         if 'p' in data:
             item['price'] = data['p']
+        f_price = float(item['price'])
+        print f_price
+        save_price(self.oritinal_url,f_price)
         return item
