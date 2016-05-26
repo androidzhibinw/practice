@@ -21,4 +21,5 @@ def save_price(item_link,price):
         app.logger.info('save price:' + str(price))
         p = Price(item.id,price)
         item.prices.append(p)
+        item.current_price=price
         db.session.commit()

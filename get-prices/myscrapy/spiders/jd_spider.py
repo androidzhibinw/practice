@@ -45,7 +45,6 @@ class JdSpider(BaseSpider):
         title = response.selector.xpath('//div[@id="name"]/h1/text()').extract()
         item = JdItem()
         item['title'] = title[0]
-        update_item_title(response.url,title[0])
         request.meta['item'] = item
         return request
     def parse_price(self, response):
@@ -58,5 +57,6 @@ class JdSpider(BaseSpider):
             item['price'] = data['p']
         f_price = float(item['price'])
         print f_price
+        update_item_title(response.url,item['title'])
         save_price(self.oritinal_url,f_price)
         return item
