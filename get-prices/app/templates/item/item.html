@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 {% block body %}
 {% if item: %}
-{{item.title}}
+<div class="row">
+<div class="col-sm-offset-2 col-sm-8">
+    {{item.title}}  {{item.current_price}}
+</div>
+</div>
+<div>
+{% for price in item.prices:%}
+<div class="col-sm-offset-2 col-sm-8">
+{{price.date_update.strftime('%Y-%m-%d')}} {{price.price}} <br/>
+</div>
+{% endfor %}
+</div>
 {% endif %}
 {% endblock %}
 
