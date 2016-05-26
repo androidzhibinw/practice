@@ -3,7 +3,7 @@ import requests
 import re
 import json
 from scrapy.selector import Selector
-from myscrapy.dbutils import update_item_title,query_item,save_price
+from app.dbutils import update_item_title,query_item,save_price
 
 PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
 

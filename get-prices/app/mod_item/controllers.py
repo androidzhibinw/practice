@@ -1,8 +1,9 @@
-from flask import Blueprint,render_template,request
+from flask import Blueprint,render_template,request,redirect
 
 from app import app,db
 from app.mod_item.forms import ItemForm
 from app.mod_item.models import Item
+from app.fetch import fetch_one
 mod_item = Blueprint('item', __name__, url_prefix='/')
 
 @mod_item.route('/')
@@ -20,6 +21,8 @@ def new_item():
             item = Item(None,form.link.data,'jd',None)
             db.session.add(item)
             db.session.commit()
+            fetch_one(item)
+            return redirect('/')
         else:
             app.logger.info('item already have in db.')
 
