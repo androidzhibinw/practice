@@ -45,5 +45,3 @@ def parse_price_jd(text):
     else:
         return None
 
-
-scrapy()
