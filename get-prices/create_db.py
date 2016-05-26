@@ -6,9 +6,10 @@ db.drop_all()
 db.create_all()
 
 
-item = Item(None,'http://item.jd.com/1856581.html','jd')
+item = Item(None,'http://item.jd.com/1856581.html','jd',None)
 
-price = Price(item.id,"100.99")
+price = Price(item.id,100.99)
+item.current_price = 100.99
 db.session.add(item)
 item.prices.append(price)
 db.session.commit()

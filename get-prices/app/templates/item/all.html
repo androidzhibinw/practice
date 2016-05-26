@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
 {% for item in items%}
-{{item.title}}
+<div class="row">
+<div class="col-sm-offset-2 col-sm-8">
+    {{item.title}}  {{item.current_price}}
+</div>
+</div>
 {% endfor %}
 {% endblock %}

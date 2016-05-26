@@ -10,14 +10,14 @@ def items():
     items = Item.query.all()
     return  render_template('item/all.html',items=items)
 
-@mod_item.route('/new', methods=['GET','POST'])
+@mod_item.route('new', methods=['GET','POST'])
 def new_item():
     form = ItemForm()
     if request.method == 'POST' and form.validate_on_submit():
         #query before insert
         item_db= Item.query.filter(Item.link == form.link.data).first()
         if item_db is None:
-            item = Item(None,form.link.data)
+            item = Item(None,form.link.data,'jd',None)
             db.session.add(item)
             db.session.commit()
         else:

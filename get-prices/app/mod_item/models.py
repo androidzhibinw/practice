@@ -7,12 +7,14 @@ class Item(Base):
     title = db.Column(db.String())
     domain = db.Column(db.String(),nullable=False)
     link = db.Column(db.Text, nullable=False,unique=True)
+    current_price = db.Column(db.Float())
     prices = db.relationship('Price',backref='item',lazy='dynamic')
 
-    def __init__(self, title, link,domain):
+    def __init__(self, title, link,domain,cur_price):
         self.title = title
         self.link = link
         self.domain = domain
+        self.current_price = cur_price
     def __repr__(self):
         return '<Item:(%s,%s,%s)>' % (self.title,self.link,self.domain)
 class Price(Base):
