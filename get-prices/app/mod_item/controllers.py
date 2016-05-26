@@ -22,9 +22,10 @@ def new_item():
             db.session.add(item)
             db.session.commit()
             fetch_one(item)
-            return redirect('/')
+            return redirect('view/'+str(item.id))
         else:
             app.logger.info('item already have in db.')
+            return redirect('view/'+str(item_db.id))
 
     return render_template('item/new.html',form=form)
 
