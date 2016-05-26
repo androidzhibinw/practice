@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from app.mod_item.models import Item,Price
 from app import db,app
+#from sqlalchemy import desc
 
-
+PRICE_UPDATE_DAYLY = True
 def query_item():
     return Item.query.all()
 
