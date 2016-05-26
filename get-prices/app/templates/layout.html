@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>your site title</title>
+    <title>HelpMeBuy</title>
 
     <!-- Bootstrap -->
     <link href="{{url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
@@ -19,14 +19,14 @@
      <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.0.min.js') }}"></script>
      <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </head>
-  <body>
-<h3>Focus on prices</h3>
+<body>
+<h3>Help Me Buy</h3>
     <div class="form-group">
         <div class="col-sm-offset-10 col-sm-2">
             <a href="/" class="btn btn-info " role="button"><span class="glyphicon glyphicon-home"><span></a>
             <a href="{{url_for("item.new_item")}}" class="btn btn-info " role="button"><span class="glyphicon glyphicon-plus"><span></a>
         </div>
     </div>
-      {% block body %}{% endblock %}
-  </body>
+{% block body %}{% endblock %}
+</body>
 </html>

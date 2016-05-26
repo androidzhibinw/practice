@@ -3,11 +3,12 @@ from flask import Blueprint,render_template,request
 from app import app,db
 from app.mod_item.forms import ItemForm
 from app.mod_item.models import Item
-mod_item = Blueprint('item', __name__, url_prefix='/item')
+mod_item = Blueprint('item', __name__, url_prefix='/')
 
-@mod_item.route('/all')
+@mod_item.route('/')
 def items():
-    return  render_template('item/all.html')
+    items = Item.query.all()
+    return  render_template('item/all.html',items=items)
 
 @mod_item.route('/new', methods=['GET','POST'])
 def new_item():

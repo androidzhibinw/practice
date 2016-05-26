@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>All posts</h1>
+{% for item in items%}
+{{item.title}}
+{% endfor %}
 {% endblock %}
