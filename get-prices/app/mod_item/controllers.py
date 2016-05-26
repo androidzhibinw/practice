@@ -36,6 +36,9 @@ def del_item(id):
 def update_item(id):
     return 'update %d' % id
 
-@mod_item.route('/view/<int:id>')
+@mod_item.route('view/<int:id>')
 def view_item(id):
-    return 'view post %d' % id
+    item = Item.query.filter(Item.id==id).first()
+    if item:
+        print item.link
+    return render_template('item/item.html',item=item)

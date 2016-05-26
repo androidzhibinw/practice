@@ -44,4 +44,5 @@ def parse_price_jd(text):
         return price
     else:
         return None
-
+if __name__ == '__main__':
+    scrapy()
