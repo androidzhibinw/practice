@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
+<div class="new-notice">
+    <h3>support JD only now!</h3>
+</div>
 {% from "_formhelper.html" import render_field %}
 <form action="{{url_for(".new_item")}}" method="post" class="form-horizontal">
 {{form.csrf_token}}
@@ -21,6 +24,11 @@
           <div class="col-sm-offset-1 col-sm-10">
                 <input type="submit" value="添加收藏" class="btn btn-primary">
            </div>
+     </div>
+     <div class="col-sm-offset-1 new-error-msg">
+         {% if error %}
+         {{error}}
+         {% endif %}
      </div>
 </form>
 {% endblock %}

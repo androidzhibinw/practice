@@ -1,3 +1,6 @@
+body {
+    font-family: "Comic Sans MS","微软雅黑","Merriweather", "PT Serif", Georgia, "Times New Roman", serif;
+}
 .item-price {
     padding-top:20px;
 }
@@ -10,5 +13,12 @@
 
 .item-all-price {
     display:inline-block;
+    color:red;
+}
+
+.new-notice {
+    text-align:center;
+}
+.new-error-msg {
     color:red;
 }
