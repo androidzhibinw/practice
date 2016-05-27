@@ -10,8 +10,7 @@ if __name__ == '__main__':
         if dt.hour == 8:
             print 'doing scrapy at' + str(dt)
             scrapy()
-        else:
-            time.sleep(ONE_HOUR)
+        time.sleep(ONE_HOUR)
 
 
 

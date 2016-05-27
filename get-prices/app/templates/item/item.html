@@ -2,16 +2,33 @@
 {% block body %}
 {% if item: %}
 <div class="row">
-<div class="col-sm-offset-2 col-sm-8">
+<div class="col-sm-offset-2 col-sm-8 item-title">
     {{item.title}}  {{item.current_price}} <a href="{{item.link}}">原链接</a>
 </div>
 </div>
 <div>
+<div class="col-sm-offset-2 col-sm-4 item-price">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+        <th> DATE </th>
+        <th> PRICE </th>
+        </tr>
+    </thead>
+    <tbody>
 {% for price in item.prices:%}
-<div class="col-sm-offset-2 col-sm-8">
-{{price.date_update.strftime('%Y-%m-%d')}} {{price.price}} <br/>
-</div>
+    <tr>
+        <td>
+    {{price.date_update.strftime('%Y-%m-%d')}}
+    </td>
+    <td>
+        {{price.price}}
+    </td>
+    </tr>
 {% endfor %}
+    </tbody>
+    </table>
+</div>
 </div>
 {% endif %}
 {% endblock %}

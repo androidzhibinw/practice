@@ -1,0 +1,14 @@
+.item-price {
+    padding-top:20px;
+}
+
+.item-title  {
+}
+.item-all-title{
+    display:inline-block;
+}
+
+.item-all-price {
+    display:inline-block;
+    color:red;
+}
