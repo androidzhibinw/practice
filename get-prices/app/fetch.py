@@ -4,11 +4,14 @@ import re
 import json
 from scrapy.selector import Selector
 from app.dbutils import update_item_title,query_item,save_price
+from app.domainutils import DOMAIN_JD, DOMAIN_AMAZON
+from app import app
 
 PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
 
 
 def get_jd_price_url(item_url):
+    app.logger.info('get_jd_price_url:' +item_url)
     lst = item_url.split('/')
     item_id =  lst[-1].split('.')[0]
     return PRICE_URL_PREFIX+item_id
@@ -18,7 +21,12 @@ def scrapy():
         fetch_one(item)
  
 def fetch_one(item):
-    fetch_one_jd(item)
+    if item.domain == DOMAIN_JD:
+        fetch_one_jd(item)
+    elif item.domain == DOMAIN_AMAZON:
+        fetch_one_amazon(item)
+    else:
+        app.logger.info("domain not supported")
 
 def fetch_one_jd(item):
     item_url = item.link
@@ -44,5 +52,9 @@ def parse_price_jd(text):
         return price
     else:
         return None
+
+def fetch_one_amazon(item):
+    item_url = item.link
+    r = requests.get(item_url)
 if __name__ == '__main__':
     scrapy()
