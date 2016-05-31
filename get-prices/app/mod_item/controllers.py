@@ -25,7 +25,7 @@ def new_item():
             # query before insert
             item_db = Item.query.filter(Item.link == form.link.data).first()
             if item_db is None:
-                item = Item(None, form.link.data, 'jd', None)
+                item = Item(None, form.link.data, domain, None)
                 db.session.add(item)
                 db.session.commit()
                 fetch_one(item)

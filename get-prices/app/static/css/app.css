@@ -15,6 +15,10 @@ body {
     display:inline-block;
     color:red;
 }
+.item-all-domain {
+    display:inline-block;
+    color:green;
+}
 
 .new-notice {
     text-align:center;

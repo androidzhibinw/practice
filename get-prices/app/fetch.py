@@ -4,11 +4,13 @@ import re
 import json
 from scrapy.selector import Selector
 from app.dbutils import update_item_title,query_item,save_price
-from app.domainutils import DOMAIN_JD, DOMAIN_AMAZON
+from app.domainutils import DOMAIN_JD, DOMAIN_AMAZON,DOMAIN_KAOLA
 from app import app
 
 PRICE_URL_PREFIX = "http://p.3.cn/prices/get?type=1&area=1_72_4137&pdtk=&pduid=786038329&pdpin=&pdbp=0&callback=cnp&skuid=J_"
 
+def get_http_response(url):
+    return requests.get(url).text
 
 def get_jd_price_url(item_url):
     app.logger.info('get_jd_price_url:' +item_url)
@@ -22,11 +24,43 @@ def scrapy():
  
 def fetch_one(item):
     if item.domain == DOMAIN_JD:
+        print item.domain
         fetch_one_jd(item)
     elif item.domain == DOMAIN_AMAZON:
         fetch_one_amazon(item)
+    elif item.domain == DOMAIN_KAOLA:
+        fetch_one_kaola(item)
     else:
         app.logger.info("domain not supported")
+
+def fetch_one_kaola(item):
+    item_url = item.link
+    txt = get_http_response(item_url)
+    if item.title is None :
+        title = parse_kaola_title(txt)
+        if title:
+            update_item_title(item.link,title)
+    price = parse_kaola_price(txt)
+    if price:
+        f_price = float(price)
+        save_price(item.link,f_price)
+
+def parse_kaola_title(txt):
+    title = Selector(text=txt).xpath('//div[@class="crumbs"]/span/text()').extract()
+    if title:
+        app.logger.info('kaola title:' + title[0])
+        return title[0]
+    else:
+        app.logger.error('kaola get title fail!')
+    return None
+def parse_kaola_price(txt):
+    price = Selector(text=txt).xpath('//span[@id="js_currentPrice"]/span/text()').extract()
+    if price:
+        app.logger.info('kaola price:' + price[0])
+        return price[0]
+    else:
+        app.logger.info('kaola price not get!')
+    return None
 
 def fetch_one_jd(item):
     item_url = item.link
@@ -34,7 +68,10 @@ def fetch_one_jd(item):
     if item.title is None:
         r = requests.get(item_url)
         title = Selector(text=r.text).xpath('//div[@id="name"]/h1/text()').extract()
-        update_item_title(item.link,title[0])
+        if title:
+            update_item_title(item.link,title[0])
+        else:
+            app.logger.info('fail to get title')
 
     price_url = get_jd_price_url(item_url)
     price_reponse = requests.get(price_url)
