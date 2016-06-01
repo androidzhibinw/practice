@@ -23,8 +23,8 @@ def scrapy():
         fetch_one(item)
  
 def fetch_one(item):
+    print item.domain
     if item.domain == DOMAIN_JD:
-        print item.domain
         fetch_one_jd(item)
     elif item.domain == DOMAIN_AMAZON:
         fetch_one_amazon(item)
