@@ -26,6 +26,7 @@ what they mean) are dif ferent inside a character class.
  ?| none | 1 | one allowed;none required ( one optional) 
  *| none | no limit| unlimited allowed| none required (any amount ok) 
  +| 1 | no limit| unlimited allowed | one required (at least one) 
+ {min,max}| min|max| min required;max allowed
 
 
 #### lookaround 
